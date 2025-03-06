@@ -6,26 +6,19 @@
     <title>Checking Your Score...</title>
     <script>
         window.onload = function () {
-            // Retrieve scores from localStorage
+            
             let score1 = parseInt(localStorage.getItem("score1")) || 0;
             let score2 = parseInt(localStorage.getItem("score2")) || 0;
             let score3 = parseInt(localStorage.getItem("score3")) || 0;
 
-            // Calculate total score
             let totalScore = score1 + score2 + score3;
 
-            // Debugging (Remove later)
-            console.log("Score 1:", score1);
-            console.log("Score 2:", score2);
-            console.log("Score 3:", score3);
-            console.log("Total Score:", totalScore);
             window.location.href = "check_score.html";
 
-            // Check score condition and redirect
             if (totalScore < 15) {
-                window.location.href = "you_lose.html"; // Redirect to "You Lose" page
+                window.location.href = "you_lose.html"; 
             } else {
-                window.location.href = "you_win.html"; // Redirect to "You Win" page
+                window.location.href = "you_win.html"; 
             }
         };
     </script>

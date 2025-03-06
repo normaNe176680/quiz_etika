@@ -42,16 +42,13 @@
     </div>
 
     <script>
-        // Array of video file names
-        const videos = ["lose_video1.mp4", "lose_video2.mp4", "lose_video3.mp4"];
+        
+        const videos = ["/assets/videos/lose_video1.mp4", "/assets/videos/lose_video2.mp4", "/assets/videos/lose_video3.mp4"];
 
-        // Select a random video
         const randomVideo = videos[Math.floor(Math.random() * videos.length)];
 
-        // Set the video source
         document.getElementById("videoSource").src = randomVideo;
         
-        // Load the new video source
         document.getElementById("loseVideo").load();
     </script>
 </body>
