@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My Website</title>
+    <style>
+        /* Full-Screen Background */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('standing.jpg') no-repeat center center;
+            background-size: cover;
+            transition: opacity 0.8s ease-in-out; /* Smooth fade effect */
+        }
+
+        /* Batman Logo Button */
+        .batman-button {
+            display: block;
+            width: 200px; /* Adjust logo size */
+            height: 100px; /* Adjust logo size */
+            background: url('batman-logo.png') no-repeat center; /* Local image */
+            background-size: contain;
+            text-indent: -9999px; /* Hide text but keep accessibility */
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Hover Effect */
+        .batman-button:hover {
+            transform: scale(1.1); /* Slightly enlarges on hover */
+        }
+
+        /* Fade-Out Effect */
+        .fade-out {
+            opacity: 0;
+        }
+    </style>
+    <script>
+        function goToPage() {
+            document.body.classList.add("fade-out"); // Start fade animation
+            setTimeout(function() {
+                window.location.href = "comic-page.html"; // Redirect after animation
+            }, 800); // Wait for animation to complete
+        }
+    </script>
+</head>
+<body>
+    <!-- Batman Logo as Clickable Button -->
+    <a href="javascript:void(0);" class="batman-button" onclick="goToPage()">Enter</a>
+</body>
+</html>

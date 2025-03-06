@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batman vs Riddler - Comic Story</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        .panel {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            border: 2px solid yellow;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+        img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        button {
+            background: yellow;
+            color: black;
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: orange;
+        }
+        .visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <audio autoplay loop>
+        <source src="scary_ahh.mp3" type="audio/mp3">
+    </audio>
+    <h1>Batman vs The Riddler</h1>
+
+    <div class="panel visible" id="panel1">
+        <p><strong>Gotham City, Midnight...</strong> Batman arrives at an abandoned warehouse.</p>
+        <img src="batman_arrives.jpg" alt="Batman in Gotham">
+        <button onclick="nextPanel(2)">Next</button>
+    </div>
+
+    <div class="panel" id="panel2">
+        <p>Riddler: "At morning is billionare philontrophist at night....a man in a bat suit who do you think it is Batman?..."</p>
+        <img src="riddler_taunts.jpg" alt="The Riddler smirking">
+        <button onclick="nextPanel(3)">Next</button>
+    </div>
+
+    <div class="panel" id="panel3">
+        <p>Batman: "3 kidnapped children and 5 bombs location found...is it you?"</p>
+        <p>Riddler: "who know's...nobody know's...riddle me this batman</p>
+        <img src="batman_vs_riddler.jpg" alt="Batman vs Riddler">
+        <button onclick="startQuiz()">Start the Quiz</button>
+    </div>
+
+    <script>
+        let currentPanel = 1;
+
+        function nextPanel(panelNumber) {
+            // Hide the current panel
+            document.getElementById('panel' + currentPanel).classList.remove('visible');
+
+            // Move to the next panel
+            currentPanel = panelNumber;
+            setTimeout(() => {
+                document.getElementById('panel' + currentPanel).classList.add('visible');
+            }, 500); // Delay for a smooth transition
+        }
+
+        function startQuiz() {
+            window.location.href = "page1.html"; // Redirect to the quiz
+        }
+    </script>
+
+</body>
+</html>

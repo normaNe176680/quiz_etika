@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Etika dan Peradaban - Round 1</title>
+    <style>
+        body {
+            background: url('man.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            text-align: center;
+            color: rgb(222, 34, 34);
+        }
+        .container {
+            margin-top: 150px;
+        }
+        button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 15px;
+            font-size: 18px;
+            background: black;
+            color: yellow;
+            border: 2px solid yellow;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+        .quiz-container {
+            margin: 50px auto;
+            width: 80%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .question {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .options button {
+            width: 100%;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<audio autoplay loop>
+    <source src="man.mp3" type="audio/mp3">
+</audio>
+
+<div class="container" id="home">
+    <h1>Selamat Datang ke Soalan Etika dan Peradaban</h1>
+    <button onclick="showGame()">Start Game</button>
+    <button onclick="showInstructions()">Instructions</button>
+    <button onclick="showAbout()">About</button>
+</div>
+
+<div class="quiz-container hidden" id="quiz">
+    <h2>Quiz Etika dan Peradaban - Round 1</h2>
+    <p class="question" id="question-text"></p>
+    <div class="options">
+        <button onclick="checkAnswer(0)"></button>
+        <button onclick="checkAnswer(1)"></button>
+        <button onclick="checkAnswer(2)"></button>
+    </div>
+    <p id="score">Score: 0</p>
+</div>
+
+<div class="quiz-container hidden" id="instructions">
+    <h2>Instructions</h2>
+    <p>Jawab 10 soalan tentang ETIKA DAN PERADABAN!</p>
+    <p>Pilih jawapan yang betul di antara 3 pilihan yang diberikan.</p>
+    <button onclick="showHome()">Back</button>
+</div>
+
+<div class="quiz-container hidden" id="about">
+    <h2>Ahli Kumpulan</h2>
+    <p>1) NORMAN HAZIQ BIN SIMLI (02DKA24F1100)</p>
+    <p>2) MOHAMAD HAKIMI BIN AZMAN (02DKA24F1029)</p>
+    <p>3) MUHAMMAD FAEZ FAKHRIY BIN KHAIRUL HASHIMY (02DKA24F1075)</p>
+    <p>4) MUHAMMAD DANIAL AL HAZIQ BIN ABDUL GHULAM (02DKA24F1095)</p>
+    <p>5) MOHAMED SAUFIK BIN JAIRUS KHAN (02DKA24F1055)</p>
+    <button onclick="showHome()">Back</button>
+</div>
+
+<script>
+    let questions = [
+        { question: "1.Apakah maksud etika?", options: ["Prinsip moral", "Peraturan undang-undang", "Gaya hidup moden"], answer: 0 },
+        { question: "2.Apakah kepentingan peradaban?", options: ["Identiti bangsa", "Perpecahan masyarakat", "Sikap individualistik"], answer: 0 },
+        { question: "3.Apakah faktor utama peradaban Malaysia?", options: ["Budaya dan kaum", "Pengaruh luar", "Tiada nilai sejarah"], answer: 0 },
+        { question: "4.Apakah ciri utama etika di Malaysia?", options: ["Nilai ketimuran", "Tanpa nilai tradisional", "Individu utama"], answer: 0 },
+        { question: "5.Apa tujuan utama etika?", options: ["Harmoni masyarakat", "Kebebasan individu", "Hapus tradisi"], answer: 0 },
+        { question: "6.Bagaimana peradaban diperkukuh?", options: ["Pendidikan nilai", "Abaikan budaya", "Sekat agama"], answer: 0 },
+        { question: "7.Apakah nilai utama Malaysia?", options: ["Toleransi", "Prejudis kaum", "Materialisme"], answer: 0 },
+        { question: "8.Kesan positif etika?", options: ["Tanggungjawab", "Konflik generasi", "Sukar sosial"], answer: 0 },
+        { question: "9.Bagaimana etika bantu pembangunan?", options: ["Masyarakat bersatu", "Keuntungan utama", "Abaikan moral"], answer: 0 },
+        { question: "10.Cabaran utama peradaban?", options: ["Globalisasi", "Kekalkan adat", "Amal nilai murni"], answer: 0 },
+        { question: "11. Apakah maksud etika dalam konteks kehidupan manusia?", options: [" Peraturan yang hanya berkaitan dengan undang-undang", " Prinsip moral yang membimbing tingkah laku manusia" , " Konsep yang hanya terpakai dalam bidang perniagaan"], answer: 1 },
+            { question: "12. Apakah peranan etika dalam masyarakat?", options: [" Membantu membentuk masyarakat yang harmoni dan berdisiplin", " Menggalakkan sikap individualistik tanpa batasan", " Menghapuskan kepelbagaian budaya dalam kehidupan sosial"], answer: 0 },
+            { question: "13. Apakah perbezaan antara etika dan moral?", options: [" Etika merujuk kepada prinsip umum, manakala moral adalah amalan individu", " Etika adalah peraturan yang dipaksa, manakala moral adalah peraturan rasmi kerajaan", " Etika hanya penting dalam organisasi, manakala moral berkaitan dengan undang-undang"], answer: 0 },
+            { question: "14. Apakah nilai utama dalam konsep etika?", options: [" Kejujuran, keadilan, dan tanggungjawab", " Kepentingan peribadi melebihi masyarakat", " Sikap tamak dan mementingkan diri sendiri"], answer: 0 },
+            { question: "15. Apakah kepentingan mematuhi etika dalam kehidupan seharian?", options: [" Memastikan keharmonian sosial dan integriti individu", " Membantu seseorang mencapai kejayaan tanpa mengambil kira orang lain", " Memberikan kebebasan mutlak dalam membuat keputusan tanpa tanggungjawab"], answer: 0 },
+            { question: "16. Apakah maksud peradaban dalam konteks masyarakat?", options: [" Pembangunan sosial, budaya, dan intelektual sesuatu masyarakat", " Kemajuan teknologi tanpa mengambil kira nilai moral", " Kehidupan yang hanya berfokus pada kekayaan material"], answer: 0 },
+            { question: "17. Bagaimanakah etika dan peradaban saling berkaitan?", options: [" Etika membentuk asas moral, manakala peradaban mencerminkan budaya sesuatu masyarakat", " Etika hanya berkaitan dengan peraturan individu, manakala peradaban berkaitan dengan teknologi", " Etika dan peradaban tidak mempunyai hubungan antara satu sama lain"], answer: 0 },
+            { question: "18. Bagaimanakah etika boleh diterapkan dalam organisasi dan tempat kerja?", options: [" Melalui pematuhan kod etika kerja dan amalan integriti", " Dengan mengutamakan keuntungan tanpa mengambil kira nilai moral", " Dengan mengabaikan kepentingan pekerja dan masyarakat"], answer: 0 },
+            { question: "19. Apakah ciri utama masyarakat yang mempunyai peradaban tinggi?", options: [" Mengamalkan sikap bertanggungjawab dan menghormati hak orang lain", " Menolak kepelbagaian budaya dalam negara", " Mengutamakan kemajuan ekonomi tanpa mempedulikan nilai moral"], answer: 0 },
+            { question: "20. Apakah cabaran utama dalam mengekalkan etika dan peradaban dalam masyarakat moden?", options: [" Pengaruh negatif globalisasi dan perubahan nilai budaya", " Pengukuhan pendidikan moral dalam masyarakat", " Peningkatan kesedaran terhadap etika dan integriti"], answer: 0 },
+            {question: "21. Apakah maksud masyarakat majmuk?",options: ["Masyarakat yang terdiri daripada pelbagai kaum, agama, dan budaya","Masyarakat yang hanya mempunyai satu kaum dan satu budaya","Masyarakat yang menolak kepelbagaian dalam kehidupan sosial"],answer: 0},
+            {question: "22. Mengapakah pentingnya etika dalam masyarakat kepelbagaian?",options: ["Untuk memastikan keharmonian dan perpaduan antara kaum","Untuk menghapuskan identiti budaya yang berbeza","Untuk mewujudkan persaingan antara kumpulan etnik"],answer: 0},
+            {question: "23. Apakah konsep utama dalam membentuk perpaduan dalam masyarakat kepelbagaian?",options: ["Toleransi, hormat-menghormati, dan keadilan sosial","Diskriminasi dan keutamaan terhadap satu kaum sahaja","Mengutamakan kepentingan individu tanpa mengira masyarakat sekeliling"],answer: 0},
+            {question: "24. Bagaimanakah interaksi sosial membantu mengukuhkan perpaduan dalam masyarakat majmuk?",options: ["Dengan membina hubungan yang saling menghormati antara kaum","Dengan mengelakkan pergaulan antara kaum yang berbeza","Dengan meminggirkan budaya yang berbeza dari budaya sendiri"],answer: 0},
+            {question: "25. Apakah peranan pendidikan dalam memupuk etika dalam masyarakat kepelbagaian?","options": ["Memberikan pemahaman tentang kepelbagaian budaya dan nilai moral","Mengutamakan satu budaya sahaja dalam sistem pendidikan","Mengabaikan nilai-nilai etika dalam kurikulum"],"answer": 0},
+            {question: "26. Apakah cabaran utama dalam mengekalkan keharmonian dalam masyarakat majmuk?",options: ["Pengaruh fahaman ekstremisme dan prejudis antara kaum","Peningkatan kesedaran terhadap nilai toleransi dan perpaduan","Keprihatinan kerajaan terhadap kesejahteraan rakyat"],answer: 0},
+            {question: "27. Bagaimanakah media boleh membantu menggalakkan perpaduan dalam masyarakat kepelbagaian?",options: ["Dengan menyebarkan mesej yang menggalakkan keharmonian dan toleransi","Dengan menyiarkan kandungan yang memecah-belahkan kaum","Dengan mengetepikan kepentingan budaya dan adat resam masyarakat"],answer: 0},
+            {question:"28. Apakah kesan positif penghayatan etika dalam masyarakat pelbagai kaum?",options: ["Meningkatkan sikap saling memahami dan kerjasama antara kaum","Membawa kepada perpecahan sosial dan ketidakstabilan","Mengurangkan interaksi antara individu yang berbeza latar belakang"],answer: 0},
+            {question: "29. Bagaimanakah undang-undang dan dasar kerajaan membantu mengekalkan keharmonian dalam masyarakat kepelbagaian?",options: ["Dengan menggubal dasar yang adil dan saksama kepada semua kaum","Dengan memberi keutamaan kepada satu kaum sahaja","Dengan mengabaikan hak-hak kumpulan minoriti"],answer: 0},
+            {question: "30. Apakah nilai utama yang perlu diterapkan dalam masyarakat kepelbagaian?",options: ["Kesederhanaan, toleransi, dan hormat-menghormati","Sikap prejudis terhadap kaum lain","Mengutamakan kepentingan peribadi berbanding masyarakat"],answer: 0 }
+        ];    
+    let currentQuestion = 0;
+    let score = 0; // Ensure score is reset on page load
+
+    function showHome() {
+        document.getElementById("home").classList.remove("hidden");
+        document.getElementById("quiz").classList.add("hidden");
+        document.getElementById("instructions").classList.add("hidden");
+        document.getElementById("about").classList.add("hidden");
+    }
+
+    function showGame() {
+        localStorage.removeItem("score1"); // Reset stored score
+        score = 0; // Reset score variable
+        currentQuestion = 0; // Reset question index
+        document.getElementById("score").textContent = "Score: " + score; // Update displayed score
+        document.getElementById("home").classList.add("hidden");
+        document.getElementById("quiz").classList.remove("hidden");
+        loadQuestion();
+    }
+
+    function showInstructions() {
+        document.getElementById("home").classList.add("hidden");
+        document.getElementById("instructions").classList.remove("hidden");
+    }
+
+    function showAbout() {
+        document.getElementById("home").classList.add("hidden");
+        document.getElementById("about").classList.remove("hidden");
+    }
+
+    function loadQuestion() {
+        if (currentQuestion >= questions.length) {
+            alert("Tahniah! Anda akan ke pusingan seterusnya.");
+            localStorage.setItem("score1", score);
+            window.location.href = "check_score.html"; // Redirect to next round
+            return;
+        }
+        let q = questions[currentQuestion];
+        document.getElementById("question-text").textContent = q.question;
+        let buttons = document.querySelectorAll(".options button");
+        buttons.forEach((btn, i) => {
+            btn.textContent = q.options[i];
+            btn.onclick = () => checkAnswer(i);
+        });
+    }
+
+    function checkAnswer(index) {
+        if (index === questions[currentQuestion].answer) {
+            score++;
+            document.getElementById("score").textContent = "Score: " + score;
+        }
+        currentQuestion++;
+        loadQuestion();
+    }
+
+    window.onload = function () {
+        document.getElementById("score").textContent = "Score: " + score;
+        loadQuestion();
+    };
+</script>
+
+</body>
+</html>
+
+
+
+

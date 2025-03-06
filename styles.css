@@ -1,0 +1,41 @@
+body.gotham-theme {
+    background-color: #111;
+    color: #fff;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-align: center;
+}
+
+.comic-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.panel {
+    width: 80%;
+    max-width: 500px;
+    margin: 20px;
+    padding: 20px;
+    border: 3px solid #00ff00;
+    background-color: #222;
+    box-shadow: 5px 5px 15px rgba(0, 255, 0, 0.5);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.panel img {
+    width: 100px;
+    height: auto;
+}
+
+.next-button {
+    display: block;
+    margin: 30px auto;
+    padding: 10px 20px;
+    background-color: #00ff00;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
